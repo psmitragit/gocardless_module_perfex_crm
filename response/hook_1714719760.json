@@ -1,0 +1,1 @@
+{"events":[{"id":"EV01KNGQ8GVDRB","created_at":"2024-05-03T07:02:31.622Z","resource_type":"subscriptions","action":"created","metadata":{},"details":{"origin":"api","cause":"subscription_created","description":"Subscription created via the API."},"links":{"subscription":"SB000APSEE38YR"},"resource_metadata":{}}],"meta":{"webhook_id":"WB002QE75NEE1C"}}
