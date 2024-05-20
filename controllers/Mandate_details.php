@@ -36,6 +36,16 @@ class Mandate_details extends AdminController
 
         $data['customers'] = $this->clients_model->get();
         $data['mandates'] = $mandates;
+        $CI = &get_instance();
+        $CI->db->where('status', 'active');
+        $customerMandates =  $CI->db->get(db_prefix() . 'gocardless_mandate')->result();
+        $cusMandates = [];
+        if (!empty($customerMandates)) {
+            foreach ($customerMandates as $customerMandate) {
+                $cusMandates[$customerMandate->mandateid] = $customerMandate->companyid;
+            }
+        }
+        $data['cusMandates'] = $cusMandates;
         $this->load->view('admin/importMandates', $data);
     }
     public function get_active_mandates_by_customer($customerId = null)
@@ -68,15 +78,5 @@ class Mandate_details extends AdminController
     public function get_mandate($company_id, $withCanceled = false)
     {
         return $this->gocardless_gateway->get_mandate($company_id, $withCanceled);
-    }
-    public function checkIfCustomerSelectedMandate($cusId, $mandate)
-    {
-        $mandate = $this->get_mandate($cusId, true);
-        if (!empty($mandate)) {
-            var_dump($mandate);
-            die;
-        } else {
-            return false;
-        }
     }
 }

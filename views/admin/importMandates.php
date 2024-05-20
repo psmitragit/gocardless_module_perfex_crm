@@ -31,8 +31,15 @@
                                             <div class="form-group">
                                                 <select id="customer" name="companyid" class="form-control">
                                                     <option value="">Select</option>
-                                                    <?php foreach ($customers as $customer) { ?>
-                                                        <option value="<?= $customer['userid']; ?>">
+                                                    <?php foreach ($customers as $customer) {
+
+                                                        $selected = '';
+                                                        if (isset($cusMandates[$mandate->id]) && $cusMandates[$mandate->id] == $customer['userid']) {
+                                                            $selected = 'selected';
+                                                        }
+
+                                                    ?>
+                                                        <option <?= $selected ?> value="<?= $customer['userid']; ?>">
                                                             <?= $customer['company']; ?>
                                                         </option>
                                                     <?php } ?>
