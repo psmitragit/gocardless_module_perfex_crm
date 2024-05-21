@@ -13,20 +13,25 @@
                                 <div class="row">
                                     <!-- Left section for bank details -->
                                     <div class="col-md-6">
-                                        <h5>Mandate Details</h5>
-                                        <p>ID: <?= $mandate->id ?></p>
-                                        <p>Customer ID: <?= $mandate->links->customer ?></p>
-                                        <p>Customer Bank Account: <?= $mandate->links->customer_bank_account ?></p>
-                                        <p>Reference: <?= $mandate->reference ?></p>
-                                        <p>Status: <?= strtoupper($mandate->status) ?></p>
-                                        <p>Created on: <?= date('Y-m-d H:i', strtotime($mandate->created_at)) ?></p>
+                                        <h5><strong>Mandate Details</strong></h5>
+                                        <p><strong>Mandate ID</strong>: <?= $mandate['mandate_id'] ?></p>
+                                        <p><strong>Customer ID</strong>: <?= $mandate['customer_id'] ?></p>
+                                        <p><strong>Name</strong>: <?= $mandate['customer_name'] ?></p>
+                                        <p><strong>Email</strong>: <?= $mandate['email'] ?></p>
+                                        <p><strong>Country Code</strong>: <?= $mandate['country_code'] ?></p>
+                                        <p><strong>Address</strong>: <?= $mandate['address_line1'] ?></p>
+                                        <p><strong>Postal Code</strong>: <?= $mandate['postal_code'] ?></p>
+                                        <p><strong>City</strong>: <?= $mandate['city'] ?></p>
+                                        <p><strong>Bank ACC</strong>: <?= $mandate['customer_bank'] ?></p>
+                                        <p><strong>Status</strong>: <?= $mandate['status'] ?></p>
+                                        <p><strong>Created At</strong>: <?= $mandate['created_at'] ?></p>
                                     </div>
 
                                     <!-- Right section for customer dropdown and save button -->
                                     <div class="col-md-6">
                                         <?= form_open(admin_url('gocardless/mandate_details/save_customer_mandate'), ['method' => 'post', 'class' => 'row']); ?>
-                                        <input type="hidden" name="mandateid" value="<?= $mandate->id ?>">
-                                        <input type="hidden" name="gocardless_companyid" value="<?= $mandate->links->customer ?>">
+                                        <input type="hidden" name="mandateid" value="<?= $mandate['mandate_id'] ?>">
+                                        <input type="hidden" name="gocardless_companyid" value="<?= $mandate['customer_id'] ?>">
                                         <div class="col-md-8">
                                             <div class="form-group">
                                                 <select id="customer" name="companyid" class="form-control">
@@ -34,7 +39,7 @@
                                                     <?php foreach ($customers as $customer) {
 
                                                         $selected = '';
-                                                        if (isset($cusMandates[$mandate->id]) && $cusMandates[$mandate->id] == $customer['userid']) {
+                                                        if (isset($cusMandates[$mandate['mandate_id']]) && $cusMandates[$mandate['mandate_id']] == $customer['userid']) {
                                                             $selected = 'selected';
                                                         }
 
